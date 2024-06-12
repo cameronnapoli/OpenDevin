@@ -32,6 +32,15 @@ endif
 	@$(MAKE) -s build-frontend
 	@echo "$(GREEN)Build completed successfully.$(RESET)"
 
+build-backend:
+	@echo "$(GREEN)Building project...$(RESET)"
+	@$(MAKE) -s check-dependencies
+ifeq ($(INSTALL_DOCKER),)
+	@$(MAKE) -s pull-docker-image
+endif
+	@$(MAKE) -s install-python-dependencies
+	@echo "$(GREEN)Build completed successfully.$(RESET)"
+
 check-dependencies:
 	@echo "$(YELLOW)Checking dependencies...$(RESET)"
 	@$(MAKE) -s check-system
